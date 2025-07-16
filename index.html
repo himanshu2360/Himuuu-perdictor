@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Himuuu Predictor Pro</title>
+  <style>
+    body {
+      margin: 0;
+      background-image: url('https://images.unsplash.com/photo-1604014238252-d2b2dfbfc5d4?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      backdrop-filter: brightness(0.8);
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+    .screen, .screen2, .main-app {
+      display: none;
+      text-align: center;
+      padding: 20px;
+    }
+    .active { display: block; }
+    h1 { font-size: 3em; color: #00ffc8; text-shadow: 0 0 10px #00ffc8; }
+    .insta-follow {
+      font-size: 1.5em;
+      margin: 20px 0;
+      color: #f58529;
+    }
+    .follow-btn {
+      background: #f58529;
+      color: white;
+      font-size: 1.2em;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .glow-day {
+      font-size: 2em;
+      color: #ffde59;
+      animation: scrollDay 5s linear infinite;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 100%;
+      display: inline-block;
+    }
+    @keyframes scrollDay {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    .matrix {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(black, #111 2px);
+      opacity: 0.1;
+      pointer-events: none;
+    }
+    input[type=password], input[type=number] {
+      font-size: 1.2em;
+      padding: 10px;
+      margin: 5px;
+      width: 60px;
+      border-radius: 10px;
+      border: 2px solid #00ffc8;
+      background: #ffffffcc;
+      color: black;
+      font-weight: bold;
+    }
+    .predict-btn {
+      font-size: 1.3em;
+      padding: 10px 20px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 8px;
+      background: #ff4c4c;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .predict-btn:hover {
+      background: #ff1c1c;
+      transform: scale(1.05);
+    }
+    .prediction {
+      font-size: 2em;
+      margin-top: 30px;
+      color: #00ffcc;
+    }
+    .jai-bhole {
+      font-size: 1.3em;
+      color: #00bfa5;
+      font-weight: bold;
+      animation: scrollDay 6s linear infinite;
+      white-space: nowrap;
+    }
+    .loader {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #ff4c4c;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .clock { font-size: 1em; color: #ccc; margin-top: 10px; animation: glow 2s ease-in-out infinite alternate; }
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #fff; }
+      to { text-shadow: 0 0 20px #ffde59; }
+    }
+  </style>
+</head>
+<body>
+  <audio autoplay loop hidden>
+    <source src="https://cdn.pixabay.com/audio/2022/03/14/audio_d9a9cc7b57.mp3" type="audio/mpeg">
+  </audio>
+  <div class="matrix">HACKING... HACKING... HACKING... HACKING...</div>
+  <div class="screen active" id="screen1">
+    <h1>Welcome to Himuuu Predictor</h1>
+    <input type="password" id="password" placeholder="Enter Password"/>
+    <br><br>
+    <button class="predict-btn" onclick="checkPassword()">Enter</button>
+  </div>
+
+  <div class="screen2" id="screen2">
+    <h1>Follow me on Insta</h1>
+    <div class="insta-follow">@itzhimuuu</div>
+    <a href="https://www.instagram.com/itzhimuuu/" target="_blank">
+      <button class="follow-btn" onclick="goToPredict()">Follow</button>
+    </a>
+  </div>
+
+  <div class="main-app" id="mainApp">
+    <div class="glow-day" id="dayDisplay">MONDAY</div>
+    <div class="clock" id="clock"></div>
+    <h2 style="color:#fff; text-shadow:0 0 5px #00ffcc;">Enter Last 4 Fan Tan Results (1–4):</h2>
+    <input type="number" id="r1" min="1" max="4">
+    <input type="number" id="r2" min="1" max="4">
+    <input type="number" id="r3" min="1" max="4">
+    <input type="number" id="r4" min="1" max="4">
+    <br>
+    <div class="loader" id="loader" style="display:none;"></div>
+    <button class="predict-btn" onclick="predict()">Predict</button>
+    <div class="prediction" id="prediction"></div>
+    <div style="margin-top:20px;color:#ffea00;font-size:1.2em;text-shadow:0 0 5px #000;">Maintain 3 Level with Himuuu Predictor</div>
+    <div class="jai-bhole">🔱 Jai Bhole Baba Ki Dosto 🔱</div>
+  </div>
+
+<script>
+function checkPassword() {
+  const pass = document.getElementById("password").value;
+  if (pass === "himuuu@786") {
+    document.getElementById("screen1").classList.remove("active");
+    document.getElementById("screen2").classList.add("active");
+  } else {
+    alert("Wrong password!");
+  }
+}
+
+function goToPredict() {
+  document.getElementById("screen2").classList.remove("active");
+  document.getElementById("mainApp").classList.add("active");
+}
+
+function predict() {
+  if (navigator.vibrate) navigator.vibrate(100);
+  const r = [parseInt(r1.value), parseInt(r2.value), parseInt(r3.value), parseInt(r4.value)];
+  const freq = [0,0,0,0,0];
+  r.forEach(val => { if (val >=1 && val <=4) freq[val]++; });
+  const sorted = [1,2,3,4].sort((a,b)=>freq[a]-freq[b]);
+  document.getElementById("loader").style.display = "block";
+  setTimeout(() => {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("prediction").innerText = "Prediction: " + sorted.slice(0,3).join(" - ");
+  }, 2000);
+}
+
+function updateTime() {
+  const now = new Date();
+  const days = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+  document.getElementById("clock").innerText = now.toLocaleString();
+  document.getElementById("dayDisplay").innerText = days[now.getDay()];
+}
+setInterval(updateTime, 1000);
+updateTime();
+</script>
+</body>
+</html>
